@@ -1,0 +1,123 @@
+{
+    "openapi":"3.0.0",
+    "info":{
+        "version":"1.0.0",
+        "title":"ptool-express-boilerplate",
+        "description":"A boilerplate express server that comes with all the necessary functionality and structure for a production ready application.",
+        "termsOfService":"",
+        "contact":{
+            "name":"",
+            "url":"",
+            "email":""
+        },
+        "license":{
+            "name":"",
+            "url":""
+        }
+    },
+    "servers":[
+        {
+            "url":"",
+            "description":""
+        }
+    ],
+    "paths":{
+        "/example":{
+            "summary":"",
+            "description":"",
+            "get":{
+                "tags":[],
+                "summary":"",
+                "description":"",
+                "externalDocs":{},
+                "operationId":"",
+                "parameters":[],
+                "requestBody":{},
+                "responses":{
+                    "200":{
+                        "description": "",
+                        "content":{
+                            "application/json":{}
+                        }
+                    },
+                    "400":{
+                        "description": "",
+                        "content":{
+                            "application/json":{}
+                        }
+                    },
+                    "500":{
+                        "description": "",
+                        "content":{
+                            "application/json":{}
+                        }
+                    }
+                },
+                "security":[]
+            },
+            "post":{
+                "200":{
+                    "description": "",
+                    "content":{
+                        "application/json":{}
+                    }
+                },
+                "400":{
+                    "description": "",
+                    "content":{
+                        "application/json":{}
+                    }
+                },
+                "500":{
+                    "description": "",
+                    "content":{
+                        "application/json":{}
+                    }
+                }
+            },
+            "put":{
+                "200":{
+                    "description": "",
+                    "content":{
+                        "application/json":{}
+                    }
+                },
+                "400":{
+                    "description": "",
+                    "content":{
+                        "application/json":{}
+                    }
+                },
+                "500":{
+                    "description": "",
+                    "content":{
+                        "application/json":{}
+                    }
+                }
+            },
+            "delete":{
+                "200":{
+                    "description": "",
+                    "content":{
+                        "application/json":{}
+                    }
+                },
+                "400":{
+                    "description": "",
+                    "content":{
+                        "application/json":{}
+                    }
+                },
+                "500":{
+                    "description": "",
+                    "content":{
+                        "application/json":{}
+                    }
+                }
+            }
+        }
+    },
+    "security":[],
+    "tags":[],
+    "externalDocs":{}
+}
