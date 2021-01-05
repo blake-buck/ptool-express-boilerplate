@@ -1,28 +1,26 @@
-const {SERVER_PORT, API_VERSION, FRONTEND_DIRECTORY_PATH} = require('./config');
-const exampleRoutes = require('./routes/example');
-
-const standardLogger = require('./logger');
-
-const cors = require('cors');
-const helmet = require('helmet');
-
 const express = require('express');
-const { standardRateLimit } = require('./middleware/middleware');
+
+const {SERVER_PORT} = require('./config');
+const standardLogger = require('./logger');
+const initializeRoutes = require('./routes/routes');
+const {
+    initializeStaticAssetServing,
+    initializeStandardMiddleware,
+    initializeApiVersion
+} = require('./initilization');
+
 
 const app = express();
 
+initializeStaticAssetServing(app);
 
-app.use(express.static(FRONTEND_DIRECTORY_PATH))
+initializeStandardMiddleware(app);
 
-app.use(cors());
-app.use(helmet());
-app.use(express.json());
-app.use(standardRateLimit);
+initializeApiVersion(app);
 
-app.use(`/api/${API_VERSION}`, (req, res, next) => next());
-app.use(exampleRoutes);
+initializeRoutes(app);
 
-app.listen(SERVER_PORT, () => console.log(`Listening on ${SERVER_PORT}`));
+app.listen(SERVER_PORT, () => standardLogger.info(`Listening on ${SERVER_PORT}`));
 
 process.on('uncaughtException', (error) => {
     standardLogger.error(error);

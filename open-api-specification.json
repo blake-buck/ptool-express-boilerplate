@@ -6,19 +6,19 @@
         "description":"A boilerplate express server that comes with all the necessary functionality and structure for a production ready application.",
         "termsOfService":"",
         "contact":{
-            "name":"",
-            "url":"",
-            "email":""
+            "name":"Blake Buck",
+            "url":"https://blakebuck.us",
+            "email":"blake.buck@hey.com"
         },
         "license":{
-            "name":"",
-            "url":""
+            "name":"MIT",
+            "url":"https://mit-license.org/"
         }
     },
     "servers":[
         {
-            "url":"",
-            "description":""
+            "url":"http://localhost:9000/",
+            "description":"Development server"
         }
     ],
     "paths":{
