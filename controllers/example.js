@@ -7,7 +7,7 @@ const getExamplesSchema = Joi.object({
     offset: Joi.number().default(0),
     fields: Joi.string().pattern(/^[\w+,*]+$/i).default('id,description')
 });
-function getExamples(request, response){
+async function getExamples(request, response){
     const validationResult = getExamplesSchema.validate(request.query);
     if(validationResult.error){
         return response.status(400).json(validationResult.error);
@@ -16,14 +16,14 @@ function getExamples(request, response){
     const paginationData = {limit, offset} = validationResult.value;
     const fieldData = validationResult.value.fields;
 
-    const result = exampleService.getExamples(paginationData, fieldData);
+    const result = await exampleService.getExamples(paginationData, fieldData);
     return response.status(result.status).json(result.body);
 }
 
 const getSpecificExampleSchema = Joi.object({
     fields: Joi.string().pattern(/^[\w+,*]+$/i).default('id,description')
 })
-function getSpecificExample(request, response){
+async function getSpecificExample(request, response){
     const validationResult = getSpecificExampleSchema.validate(request.query);
     if(validationResult.error){
         return response.status(400).json(validationResult.error);
@@ -31,40 +31,75 @@ function getSpecificExample(request, response){
 
     const fieldData = validationResult.value.fields;
 
-    const result = exampleService.getSpecificExample(request.params.id, fieldData);
+    const result = await exampleService.getSpecificExample(request.params.id, fieldData);
     return response.status(result.status).json(result.body);
 }
 
-function postExample(request, response){
-    const result = exampleService.postExample(request.body);
+const postExampleSchema = Joi.object({
+    description: Joi.string(),
+    status: Joi.number()
+})
+async function postExample(request, response){
+    const validationResult = postExampleSchema.validate(request.body);
+    if(validationResult.error){
+        return response.status(400).json(validationResult.error);
+    }
+
+    const result = await exampleService.postExample(request.body);
     return response.status(result.status).json(result.body);
 }
 
-function updateExamples(request, response){
-    const result = exampleService.updateExamples(request.body);
+const updateExamplesSchema = Joi.array().items({
+    id: Joi.number(),
+    description: Joi.string(),
+    status: Joi.number()
+}) 
+async function updateExamples(request, response){
+    const validationResult = updateExamplesSchema.validate(request.body);
+    if(validationResult.error){
+        return response.status(400).json(validationResult.error);
+    }
+
+    const result = await exampleService.updateExamples(request.body);
     return response.status(result.status).json(result.body);
 }
 
-function updateSpecificExample(request, response){
-    const result = exampleService.updateSpecificExample(request.body);
+const updateSpecificExampleSchema = Joi.object({
+    id: Joi.number(),
+    description: Joi.string(),
+    status: Joi.number()
+})
+async function updateSpecificExample(request, response){
+    const validationResult = updateSpecificExampleSchema.validate(request.body);
+    if(validationResult.error){
+        return response.status(400).json(validationResult.error);
+    }
+
+    const result = await exampleService.updateSpecificExample(request.body);
     return response.status(result.status).json(result.body);
 }
 
-function deleteExamples(request, response){
-    const result = exampleService.deleteExamples(request.query.deletedExamples);
+const deleteExamplesSchema = Joi.array().items(Joi.number());
+async function deleteExamples(request, response){
+    const validationResult = deleteExamplesSchema.validate(request.body);
+    if(validationResult.error){
+        return response.status(400).json(validationResult.error);
+    }
+
+    const result = await exampleService.deleteExamples(request.body);
     return response.status(result.status).json(result.body);
 }
 
 const deleteSpecificExampleSchema = Joi.object({
     id: Joi.number()
 });
-function deleteSpecificExample(request, response){
+async function deleteSpecificExample(request, response){
     const validationResult = deleteSpecificExampleSchema.validate(request.params);
     if(validationResult.error){
         return response.status(400).json(validationResult.error);
     }
 
-    const result = exampleService.deleteSpecificExample(validationResult.value.id);
+    const result = await exampleService.deleteSpecificExample(validationResult.value.id);
     return response.status(result.status).json(result.body);
 }
 

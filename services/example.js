@@ -1,9 +1,9 @@
 const models = require('../models/example');
 const standardLogger = require('../logger');
 
-function getExamples(paginationData, fieldData){
+async function getExamples(paginationData, fieldData){
     try{
-        return {status: 200, body: models.getExamples(paginationData, fieldData)}
+        return {status: 200, body: await models.getExamples(paginationData, fieldData)}
     }
     catch(e){
         standardLogger.error(e);
@@ -11,9 +11,9 @@ function getExamples(paginationData, fieldData){
     }
 }
 
-function getSpecificExample(exampleId, fieldData){
+async function getSpecificExample(exampleId, fieldData){
     try{
-        return {status: 200, body: models.getSpecificExample(exampleId)}
+        return {status: 200, body: await models.getSpecificExample(exampleId)}
     }
     catch(e){
         standardLogger.error(e);
@@ -21,9 +21,9 @@ function getSpecificExample(exampleId, fieldData){
     }
 }
 
-function postExample(exampleData){
+async function postExample(exampleData){
     try{
-        return {status: 200, body: models.postExample(exampleData)}
+        return {status: 200, body: await models.postExample(exampleData)}
     }
     catch(e){
         standardLogger.error(e);
@@ -31,9 +31,9 @@ function postExample(exampleData){
     }
 }
 
-function updateExamples(exampleDataArray){
+async function updateExamples(exampleDataArray){
     try{
-        return {status: 200, body: models.updateExamples(exampleDataArray)}
+        return {status: 200, body: await models.updateExamples(exampleDataArray)}
     }
     catch(e){
         standardLogger.error(e);
@@ -41,9 +41,9 @@ function updateExamples(exampleDataArray){
     }
 }
 
-function updateSpecificExample(exampleData){
+async function updateSpecificExample(exampleData){
     try{
-        return {status: 200, body: models.updateSpecificExample(exampleData)}
+        return {status: 200, body: await models.updateSpecificExample(exampleData)}
     }
     catch(e){
         standardLogger.error(e);
@@ -51,9 +51,9 @@ function updateSpecificExample(exampleData){
     }
 }
 
-function deleteExamples(exampleIdList){
+async function deleteExamples(exampleIdList){
     try{
-        return {status: 200, body: models.deleteExamples(exampleIdList)}
+        return {status: 200, body: await models.deleteExamples(exampleIdList)}
     }
     catch(e){
         standardLogger.error(e);
@@ -61,9 +61,9 @@ function deleteExamples(exampleIdList){
     }
 }
 
-function deleteSpecificExample(exampleId){
+async function deleteSpecificExample(exampleId){
     try{
-        return {status: 200, body: models.deleteSpecificExample(exampleId)}
+        return {status: 200, body: await models.deleteSpecificExample(exampleId)}
     }
     catch(e){
         standardLogger.error(e);
