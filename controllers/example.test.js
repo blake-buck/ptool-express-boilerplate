@@ -17,7 +17,7 @@ const mockResponse = () => {
 };
   
 
-describe('Example tests', () => {
+describe('example controller tests', () => {
     it('should pass', () => {
         expect(true).toBe(true);
     });
