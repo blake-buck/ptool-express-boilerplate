@@ -7,7 +7,7 @@ const {
     initializeStaticAssetServing,
     initializeStandardMiddleware,
     initializeApiVersion
-} = require('./initilization');
+} = require('./initialization');
 
 
 const app = express();
