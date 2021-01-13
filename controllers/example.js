@@ -1,6 +1,7 @@
 const Joi = require('joi');
 
 const exampleService = require('../services/example');
+const controllerWrapper = require('./controllerWrapper');
 
 const getExamplesSchema = Joi.object({
     limit: Joi.number().default(10),
@@ -10,7 +11,7 @@ const getExamplesSchema = Joi.object({
 async function getExamples(request, response){
     const validationResult = getExamplesSchema.validate(request.query);
     if(validationResult.error){
-        return response.status(400).json(validationResult.error);
+        throw new Error(validationResult.error);
     }
 
     const paginationData = {limit, offset} = validationResult.value;
@@ -26,7 +27,7 @@ const getSpecificExampleSchema = Joi.object({
 async function getSpecificExample(request, response){
     const validationResult = getSpecificExampleSchema.validate(request.query);
     if(validationResult.error){
-        return response.status(400).json(validationResult.error);
+        throw new Error(validationResult.error);
     }
 
     const fieldData = validationResult.value.fields;
@@ -42,7 +43,7 @@ const postExampleSchema = Joi.object({
 async function postExample(request, response){
     const validationResult = postExampleSchema.validate(request.body);
     if(validationResult.error){
-        return response.status(400).json(validationResult.error);
+        throw new Error(validationResult.error);
     }
 
     const result = await exampleService.postExample(request.body);
@@ -57,7 +58,7 @@ const updateExamplesSchema = Joi.array().items({
 async function updateExamples(request, response){
     const validationResult = updateExamplesSchema.validate(request.body);
     if(validationResult.error){
-        return response.status(400).json(validationResult.error);
+        throw new Error(validationResult.error);
     }
 
     const result = await exampleService.updateExamples(request.body);
@@ -72,7 +73,7 @@ const updateSpecificExampleSchema = Joi.object({
 async function updateSpecificExample(request, response){
     const validationResult = updateSpecificExampleSchema.validate(request.body);
     if(validationResult.error){
-        return response.status(400).json(validationResult.error);
+        throw new Error(validationResult.error);
     }
 
     const result = await exampleService.updateSpecificExample(request.body);
@@ -83,7 +84,7 @@ const deleteExamplesSchema = Joi.array().items(Joi.number());
 async function deleteExamples(request, response){
     const validationResult = deleteExamplesSchema.validate(request.body);
     if(validationResult.error){
-        return response.status(400).json(validationResult.error);
+        throw new Error(validationResult.error);
     }
 
     const result = await exampleService.deleteExamples(request.body);
@@ -96,7 +97,7 @@ const deleteSpecificExampleSchema = Joi.object({
 async function deleteSpecificExample(request, response){
     const validationResult = deleteSpecificExampleSchema.validate(request.params);
     if(validationResult.error){
-        return response.status(400).json(validationResult.error);
+        throw new Error(validationResult.error);
     }
 
     const result = await exampleService.deleteSpecificExample(validationResult.value.id);
@@ -104,11 +105,11 @@ async function deleteSpecificExample(request, response){
 }
 
 module.exports = {
-    getExamples,
-    getSpecificExample,
-    postExample,
-    updateExamples,
-    updateSpecificExample,
-    deleteExamples,
-    deleteSpecificExample
+    getExamples: controllerWrapper(getExamples),
+    getSpecificExample: controllerWrapper(getSpecificExample),
+    postExample: controllerWrapper(postExample),
+    updateExamples: controllerWrapper(updateExamples),
+    updateSpecificExample: controllerWrapper(updateSpecificExample),
+    deleteExamples: controllerWrapper(deleteExamples),
+    deleteSpecificExample: controllerWrapper(deleteSpecificExample)
 }

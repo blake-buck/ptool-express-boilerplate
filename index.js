@@ -22,7 +22,7 @@ initializeRoutes(app);
 
 app.listen(SERVER_PORT, () => standardLogger.info(`Listening on ${SERVER_PORT}`));
 
-process.on('uncaughtException', (error) => {
+app.on('uncaughtException', (error) => {
     standardLogger.error(error);
     process.exit(1);
 });
