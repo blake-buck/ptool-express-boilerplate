@@ -5,6 +5,8 @@ const helmet = require('helmet');
 const {API_VERSION, FRONTEND_DIRECTORY_PATH} = require('./config');
 const { standardRateLimit } = require('./middleware/middleware');
 
+const logger = require('./logger');
+
 
 function initializeStaticAssetServing(app){
     app.use(express.static(FRONTEND_DIRECTORY_PATH));
