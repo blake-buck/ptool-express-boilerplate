@@ -6,13 +6,16 @@ const initializeRoutes = require('./routes/routes');
 const {
     initializeStaticAssetServing,
     initializeStandardMiddleware,
-    initializeApiVersion
+    initializeApiVersion,
+    initializeSwaggerUi
 } = require('./initialization');
 
 
 const app = express();
 
 initializeStaticAssetServing(app);
+
+initializeSwaggerUi(app);
 
 initializeStandardMiddleware(app);
 

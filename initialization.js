@@ -2,11 +2,17 @@ const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
 
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./open-api-specification.json');
+
 const {API_VERSION, FRONTEND_DIRECTORY_PATH} = require('./config');
 const { standardRateLimit } = require('./middleware/middleware');
 
 const logger = require('./logger');
 
+function initializeSwaggerUi(app){
+    app.use('/api/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
+}
 
 function initializeStaticAssetServing(app){
     app.use(express.static(FRONTEND_DIRECTORY_PATH));
@@ -26,5 +32,6 @@ function initializeApiVersion(app){
 module.exports = {
     initializeStaticAssetServing,
     initializeStandardMiddleware,
-    initializeApiVersion
+    initializeApiVersion,
+    initializeSwaggerUi
 }
