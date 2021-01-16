@@ -22,7 +22,7 @@ function initializeStandardMiddleware(app){
     app.use(cors());
     app.use(helmet());
     app.use(express.json());
-    app.use(standardRateLimit);
+    // app.use(standardRateLimit);
 }
 
 function initializeApiVersion(app){
