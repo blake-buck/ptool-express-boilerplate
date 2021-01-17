@@ -123,6 +123,10 @@
             }
         }
     },
+    "components":{
+        "responses":{},
+        "schemas":{}
+    },
     "security":[],
     "tags":[],
     "externalDocs":{}
