@@ -7,11 +7,14 @@ const {
     initializeStaticAssetServing,
     initializeStandardMiddleware,
     initializeApiVersion,
-    initializeSwaggerUi
+    initializeSwaggerUi,
+    initializeSqlite
 } = require('./initialization');
 
 
 const app = express();
+
+initializeSqlite();
 
 initializeStaticAssetServing(app);
 

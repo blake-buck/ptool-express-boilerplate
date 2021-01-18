@@ -6,7 +6,11 @@ async function getExamples(paginationData, fieldData){
 }
 
 async function getSpecificExample(exampleId, fieldData){
-    return {status: 200, body: await models.getSpecificExample(exampleId, fieldData)}
+    const result = await models.getSpecificExample(exampleId, fieldData);
+    if(!result){
+        throw new Error('Specific example record not found.')
+    }
+    return {status: 200, body: result}
 }
 
 async function postExample(exampleData){
@@ -14,19 +18,23 @@ async function postExample(exampleData){
 }
 
 async function updateExamples(exampleDataArray){
-    return {status: 200, body: await models.updateExamples(exampleDataArray)}
+    await models.updateExamples(exampleDataArray)
+    return {status: 200, body: {message: 'Examples updated successfully'}}
 }
 
 async function updateSpecificExample(exampleData){
-    return {status: 200, body: await models.updateSpecificExample(exampleData)}
+    await models.updateSpecificExample(exampleData)
+    return {status: 200, body: {message: 'Example updated successfully'}}
 }
 
 async function deleteExamples(exampleIdList){
-    return {status: 200, body: await models.deleteExamples(exampleIdList)}
+    await models.deleteExamples(exampleIdList)
+    return {status: 200, body: {message: 'Examples deleted successfully'}}
 }
 
 async function deleteSpecificExample(exampleId){
-    return {status: 200, body: await models.deleteSpecificExample(exampleId)}  
+    await models.deleteSpecificExample(exampleId)
+    return {status: 200, body: {message: 'Example deleted successfully'}}
 }
 
 module.exports = {
