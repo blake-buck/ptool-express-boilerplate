@@ -1,1 +1,368 @@
-{"openapi":"3.0.0","info":{"version":"1.0.0","title":"ptool-express-boilerplate","description":"A boilerplate express server that comes with all the necessary functionality and structure for a production ready application.","termsOfService":"","contact":{"name":"Blake Buck","url":"https://blakebuck.us","email":"blake.buck@hey.com"},"license":{"name":"MIT","url":"https://mit-license.org/"}},"servers":[{"url":"http://localhost:9000/","description":"Development server"}],"paths":{"/example":{"get":{"summary":"Get a paginated list of example records.","parameters":[{"name":"limit","in":"query","description":"The number of records to return from the call."},{"name":"offset","in":"query","description":"The index position to start returning records from."},{"name":"fields","in":"query","description":"A comma seperated list of record fields to return"}],"responses":{"200":{"description":"Returns an array of example objects.","content":{"application/json":{"schema":{"$ref":"#/components/schemas/exampleArray"}}}},"400":{"$ref":"#/components/responses/ExampleError"},"500":{"$ref":"#/components/responses/ExampleError"}},"security":[]},"post":{"summary":"Create an entry in the example table","requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/exampleMinusId"}}}},"responses":{"200":{"description":"Returns a created example object, complete with id","content":{"application/json":{"schema":{"$ref":"#/components/schemas/example"}}}},"400":{"$ref":"#/components/responses/ExampleError"},"500":{"$ref":"#/components/responses/ExampleError"}}},"put":{"summary":"Bulk update entries in the example table","requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/exampleArray"}}}},"responses":{"200":{"$ref":"#/components/responses/ExampleOk"},"400":{"$ref":"#/components/responses/ExampleError"},"500":{"$ref":"#/components/responses/ExampleError"}}},"delete":{"summary":"Bulk delete entries in the example table","requestBody":{"content":{"application/json":{"schema":{"type":"array","style":"simple","items":{"type":"number"}}}}},"responses":{"200":{"$ref":"#/components/responses/ExampleOk"},"400":{"$ref":"#/components/responses/ExampleError"},"500":{"$ref":"#/components/responses/ExampleError"}}}},"/example/{id}":{"get":{"summary":"Returns a specific entry in the example table","parameters":[{"name":"id","in":"path","description":"The record id."},{"name":"fields","in":"query","description":"A comma seperated list of record fields to return"}],"responses":{"200":{"description":"Returns a single entry in the example table.","content":{"application/json":{"schema":{"$ref":"#/components/schemas/example"}}}},"400":{"$ref":"#/components/responses/ExampleError"},"500":{"$ref":"#/components/responses/ExampleError"}}},"put":{"summary":"Updates a specific entry in the example table","parameters":[{"name":"id","in":"path","description":"The record id."}],"requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/example"}}}},"responses":{"200":{"$ref":"#/components/responses/ExampleOk"},"400":{"$ref":"#/components/responses/ExampleError"},"500":{"$ref":"#/components/responses/ExampleError"}}},"delete":{"summary":"Deletes a specific entry in the example table","parameters":[{"name":"id","in":"path","description":"The record id."}],"responses":{"200":{"$ref":"#/components/responses/ExampleOk"},"400":{"$ref":"#/components/responses/ExampleError"},"500":{"$ref":"#/components/responses/ExampleError"}}}}},"components":{"responses":{"ExampleOk":{"description":"Standard OK response for the example routes","content":{"application/json":{"schema":{"type":"object","properties":{"message":{"type":"string"}}}}}},"ExampleError":{"description":"Standard error for the example routes","content":{"application/json":{"schema":{"type":"object","properties":{"name":{"type":"string"},"message":{"type":"string"}}}}}}},"schemas":{"example":{"type":"object","properties":{"id":{"type":"number"},"description":{"type":"string"},"status":{"type":"number"}}},"exampleMinusId":{"type":"object","properties":{"description":{"type":"string"},"status":{"type":"number"}}},"exampleArray":{"type":"array","items":{"$ref":"#/components/schemas/example"}}}},"security":[],"tags":[],"externalDocs":{}}
+{
+    "openapi": "3.0.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "ptool-express-boilerplate",
+        "description": "A boilerplate express server that comes with all the necessary functionality and structure for a production ready application.",
+        "termsOfService": "",
+        "contact": {
+            "name": "Blake Buck",
+            "url": "https://blakebuck.us",
+            "email": "blake.buck@hey.com"
+        },
+        "license": {
+            "name": "MIT",
+            "url": "https://mit-license.org/"
+        }
+    },
+    "servers": [
+        {
+            "url": "http://localhost:9000/",
+            "description": "Development server"
+        }
+    ],
+    "paths": {
+        "/example": {
+            "get": {
+                "tags":["example operations"],
+                "summary": "Get a paginated list of example records.",
+                "parameters": [
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "The number of records to return from the call."
+                    },
+                    {
+                        "name": "offset",
+                        "in": "query",
+                        "description": "The index position to start returning records from."
+                    },
+                    {
+                        "name": "fields",
+                        "in": "query",
+                        "description": "A comma seperated list of record fields to return"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Returns an array of example objects.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/exampleArray"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/ExampleError"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/ExampleError"
+                    }
+                },
+                "security": []
+            },
+            "post": {
+                "tags":["example operations"],
+                "summary": "Create an entry in the example table",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/exampleMinusId"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Returns a created example object, complete with id",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/example"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/ExampleError"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/ExampleError"
+                    }
+                }
+            },
+            "put": {
+                "tags":["example operations"],
+                "summary": "Bulk update entries in the example table",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/exampleArray"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/ExampleOk"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/ExampleError"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/ExampleError"
+                    }
+                }
+            },
+            "patch":{
+                "tags":["example operations"],
+                "summary": "Bulk partially-update entries in the example table. Every parameter except id is optional.",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/exampleArray"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/ExampleOk"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/ExampleError"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/ExampleError"
+                    }
+                }
+            },
+            "delete": {
+                "tags":["example operations"],
+                "summary": "Bulk delete entries in the example table",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "style": "simple",
+                                "items": {
+                                    "type": "number"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/ExampleOk"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/ExampleError"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/ExampleError"
+                    }
+                }
+            }
+        },
+        "/example/{id}": {
+            "get": {
+                "tags":["example operations"],
+                "summary": "Returns a specific entry in the example table",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The record id."
+                    },
+                    {
+                        "name": "fields",
+                        "in": "query",
+                        "description": "A comma seperated list of record fields to return"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Returns a single entry in the example table.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/example"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/ExampleError"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/ExampleError"
+                    }
+                }
+            },
+            "put": {
+                "tags":["example operations"],
+                "summary": "Updates a specific entry in the example table",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The record id."
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/example"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/ExampleOk"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/ExampleError"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/ExampleError"
+                    }
+                }
+            },
+            "patch":{
+                "tags":["example operations"],
+                "summary": "Partially update a specific entry in the example table",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The record id."
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/exampleMinusId"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/ExampleOk"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/ExampleError"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/ExampleError"
+                    }
+                }
+            },
+            "delete": {
+                "tags":["example operations"],
+                "summary": "Deletes a specific entry in the example table",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The record id."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/ExampleOk"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/ExampleError"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/ExampleError"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "responses": {
+            "ExampleOk": {
+                "description": "Standard OK response for the example routes",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "message": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "ExampleError": {
+                "description": "Standard error for the example routes",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "type": "string"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "schemas": {
+            "example": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "number"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "status": {
+                        "type": "number"
+                    }
+                }
+            },
+            "exampleMinusId": {
+                "type": "object",
+                "properties": {
+                    "description": {
+                        "type": "string"
+                    },
+                    "status": {
+                        "type": "number"
+                    }
+                }
+            },
+            "exampleArray": {
+                "type": "array",
+                "items": {
+                    "$ref": "#/components/schemas/example"
+                }
+            }
+        }
+    },
+    "security": [],
+    "tags": [],
+    "externalDocs": {}
+}
