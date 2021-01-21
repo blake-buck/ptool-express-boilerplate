@@ -11,18 +11,24 @@ const { standardRateLimit } = require('./middleware/middleware');
 const logger = require('./logger');
 
 function initializeSwaggerUi(app){
+    logger.info('Initializing Swagger UI...');
     app.use('/api/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
+    logger.info('Swagger UI initialized.');
 }
 
 function initializeStaticAssetServing(app){
+    logger.info('Initializing static asset serving...');
     app.use(express.static(FRONTEND_DIRECTORY_PATH));
+    logger.info('static asset serving initialized.');
 }
 
 function initializeStandardMiddleware(app){
+    logger.info('Initializing standard middleware...');
     app.use(cors());
     app.use(helmet());
     app.use(express.json());
     // app.use(standardRateLimit);
+    logger.info('standard middleware initialized.');
 }
 
 function initializeApiVersion(app){
