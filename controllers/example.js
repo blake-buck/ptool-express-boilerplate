@@ -1,7 +1,8 @@
 const Joi = require('joi');
-
-const exampleService = require('../services/example');
 const controllerWrapper = require('./controllerWrapper');
+const dependencyInjector = require('../dependency-injector');
+
+const exampleService = dependencyInjector.inject('exampleService');
 
 const getExamplesSchema = Joi.object({
     limit: Joi.number().default(10),

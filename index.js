@@ -1,7 +1,11 @@
-const express = require('express');
+const initializeModels = require('./models/initializeModels');
+const initializeServices = require('./services/initializeServices');
+const initializeControllers = require('./controllers/initializeControllers');
+initializeModels();
+initializeServices();
+initializeControllers();
 
-const {SERVER_PORT} = require('./config');
-const standardLogger = require('./logger');
+
 const initializeRoutes = require('./routes/routes');
 const {
     initializeStaticAssetServing,
@@ -11,7 +15,10 @@ const {
 } = require('./initialization');
 
 
+const express = require('express');
 const app = express();
+
+
 
 initializeStaticAssetServing(app);
 
@@ -23,6 +30,8 @@ initializeApiVersion(app);
 
 initializeRoutes(app);
 
+const standardLogger = require('./logger');
+const {SERVER_PORT} = require('./config');
 app.listen(SERVER_PORT, () => standardLogger.info(`Listening on ${SERVER_PORT}`));
 
 app.on('uncaughtException', (error) => {

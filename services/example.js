@@ -1,5 +1,7 @@
-const models = require('../models/example');
-const standardLogger = require('../logger');
+const logger = require('../logger');
+
+const dependencyInjector = require('../dependency-injector');
+const models = dependencyInjector.inject('exampleModel');
 
 async function getExamples(paginationData, fieldData){
     return {status: 200, body: await models.getExamples(paginationData, fieldData)}

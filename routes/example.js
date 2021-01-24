@@ -1,25 +1,18 @@
 const express = require('express');
 const router = express.Router();
 
-const {
-    getExamples,
-    getSpecificExample,
-    postExample,
-    updateExamples,
-    updateSpecificExample,
-    deleteExamples,
-    deleteSpecificExample
-} = require('../controllers/example');
+const dependencyInjector = require('../dependency-injector');
+const exampleController = dependencyInjector.inject('exampleController');
 
-router.get('/example', getExamples);
-router.get('/example/:id', getSpecificExample);
+router.get('/example', exampleController.getExamples);
+router.get('/example/:id', exampleController.getSpecificExample);
 
-router.post('/example', postExample);
+router.post('/example', exampleController.postExample);
 
-router.put('/example', updateExamples);
-router.put('/example/:id', updateSpecificExample);
+router.put('/example', exampleController.updateExamples);
+router.put('/example/:id', exampleController.updateSpecificExample);
 
-router.delete('/example', deleteExamples);
-router.delete('/example/:id', deleteSpecificExample);
+router.delete('/example', exampleController.deleteExamples);
+router.delete('/example/:id', exampleController.deleteSpecificExample);
 
 module.exports = router;
