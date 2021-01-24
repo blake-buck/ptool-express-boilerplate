@@ -8,6 +8,7 @@ const swaggerDocument = require('./open-api-specification.json');
 const {API_VERSION, FRONTEND_DIRECTORY_PATH} = require('./config');
 const { standardRateLimit } = require('./middleware/middleware');
 
+const dependencyInjector = require('./dependency-injector');
 const logger = require('./logger');
 
 function initializeSwaggerUi(app){
