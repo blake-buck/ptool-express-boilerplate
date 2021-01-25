@@ -1,12 +1,9 @@
 const express = require('express');
-const cors = require('cors');
-const helmet = require('helmet');
 
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./open-api-specification.json');
 
 const {API_VERSION, FRONTEND_DIRECTORY_PATH} = require('./config');
-const { standardRateLimit } = require('./middleware/middleware');
 
 const dependencyInjector = require('./dependency-injector');
 const logger = require('./logger');
@@ -25,6 +22,10 @@ function initializeStaticAssetServing(app){
 
 function initializeStandardMiddleware(app){
     logger.info('Initializing standard middleware...');
+    const cors = require('cors');
+    const helmet = require('helmet');
+    const { standardRateLimit } = require('./middleware/middleware');
+
     app.use(cors());
     app.use(helmet());
     app.use(express.json());
