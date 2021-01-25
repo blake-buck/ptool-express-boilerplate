@@ -5,6 +5,8 @@ const helmet = require('helmet');
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./open-api-specification.json');
 
+const dependencyInjector = require('./dependency-injector');
+
 const {API_VERSION, FRONTEND_DIRECTORY_PATH} = require('./config');
 const { standardRateLimit } = require('./middleware/middleware');
 
@@ -38,12 +40,13 @@ module.exports = {
 const sqlite3 = require('sqlite3');
 const {DATABASE_FILE} = require('./config');
 
-let sqlite = {};
+
 function initializeSqlite(dbFile){
+    logger.info('Initializing Sqlite...');
     const db = new sqlite3.Database(dbFile ? dbFile : DATABASE_FILE);
     db.serialize();
-    sqlite.db = db;
+    dependencyInjector.register('sqlite', db);
+    logger.info('Sqlite initialized.');
 }
 
 module.exports.initializeSqlite = initializeSqlite;
-module.exports.sqlite = sqlite;
