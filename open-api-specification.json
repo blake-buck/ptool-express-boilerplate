@@ -125,7 +125,8 @@
     },
     "components":{
         "responses":{},
-        "schemas":{}
+        "schemas":{},
+        "securitySchemes":{}
     },
     "security":[],
     "tags":[],
