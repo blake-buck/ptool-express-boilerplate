@@ -33,13 +33,8 @@ function initializeStandardMiddleware(app){
     logger.info('standard middleware initialized.');
 }
 
-function initializeApiVersion(app){
-    app.use(`/api/${API_VERSION}`, (req, res, next) => next());
-}
-
 module.exports = {
     initializeStaticAssetServing,
     initializeStandardMiddleware,
-    initializeApiVersion,
     initializeSwaggerUi
 }

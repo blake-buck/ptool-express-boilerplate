@@ -6,11 +6,10 @@ initializeServices();
 initializeControllers();
 
 
-const initializeRoutes = require('./routes/routes');
+const initializeRoutes = require('./routes/initializeRoutes');
 const {
     initializeStaticAssetServing,
     initializeStandardMiddleware,
-    initializeApiVersion,
     initializeSwaggerUi
 } = require('./initialization');
 
@@ -26,7 +25,6 @@ initializeSwaggerUi(app);
 
 initializeStandardMiddleware(app);
 
-initializeApiVersion(app);
 
 initializeRoutes(app);
 
