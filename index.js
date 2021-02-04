@@ -1,12 +1,13 @@
 const initializeModels = require('./models/initializeModels');
 const initializeServices = require('./services/initializeServices');
 const initializeControllers = require('./controllers/initializeControllers');
-initializeModels();
-initializeServices();
 initializeControllers();
+initializeServices();
+initializeModels();
 
 
 const initializeRoutes = require('./routes/initializeRoutes');
+
 const {
     initializeStaticAssetServing,
     initializeStandardMiddleware,
